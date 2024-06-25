@@ -1,7 +1,9 @@
 package dicberner.victor.galeria;
 
 import android.graphics.Bitmap;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +18,16 @@ public class MainAdapter extends RecyclerView.Adapter {
             this.mainActivity = mainActivity;
             this.photos = photos;
         }
-        @Override
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(mainActivity);
+        View v = inflater.inflate(R.layout.list_item, parent, false);
+        return new MyViewHolder(v);
+    }
+
+    @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position){
             ImageView imPhoto= holder.itemView.findViewById(R.id.imItem);
             int w = (int)
@@ -32,4 +43,9 @@ public class MainAdapter extends RecyclerView.Adapter {
                 }
             });
         }
+
+    @Override
+    public int getItemCount() {
+        return photos.size();
     }
+}
